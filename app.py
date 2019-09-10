@@ -4,9 +4,13 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 
 app = Flask(__name__)
 
-english_bot = ChatBot("Chatterbot", storage_adapter="chatterbot.storage.SQLStorageAdapter")
+#english_bot = ChatBot("Chatterbot", storage_adapter="chatterbot.storage.SQLStorageAdapter")
+english_bot = ChatBot("English Bot", 
+                    storage_adapter="chatterbot.storage.MongoDatabaseAdapter",
+                    database = "bot",
+                    database_uri = "mongodb://mongo_user:mongo_secret@0.0.0.0:27017/admin")
 trainer = ChatterBotCorpusTrainer(english_bot)
-trainer.train("chatterbot.corpus.english")
+trainer.train("chatterbot.corpus.ecwo")
 
 @app.route("/")
 def home():
